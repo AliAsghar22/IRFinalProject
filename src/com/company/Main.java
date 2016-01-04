@@ -8,9 +8,9 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Main{
 
-    private static int maxPagesToFetch = 50;
+    private static int maxPagesToFetch = 1000;
     private static int maxDepthOfCrawling = 2;
-    private static int numberOfCrawlers = 4;
+    private static int numberOfCrawlers = 1;
 
     public static void main(String[] args) throws Exception {
 
@@ -22,7 +22,6 @@ public class Main{
         config.setMaxDepthOfCrawling(maxDepthOfCrawling);
         config.setMaxPagesToFetch(maxPagesToFetch);
         config.setResumableCrawling(false);
-
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);

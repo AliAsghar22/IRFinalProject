@@ -24,7 +24,6 @@ public class koomeshkar_ir extends WebCrawler {
 
         if (FILTERS.matcher(href).matches())
             return false;
-        System.out.println(href);
         return href.startsWith("http://koomeshkar.ir/jobs/?j=%DA%A9%D9%84%DB%8C%D9%87%20%D9%85%D8%B4%D8%A7%D8%BA%D9%84");
     }
 
