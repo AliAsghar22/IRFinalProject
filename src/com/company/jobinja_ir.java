@@ -32,7 +32,7 @@ public class jobinja_ir extends WebCrawler {
     public void visit(Page page) {
         String urlp=page.getWebURL().toString();
         //url title date body
-        if (urlp.contains("companies")&&urlp.contains("job") &&page.getParseData() instanceof HtmlParseData) {
+        if (urlp.contains("companies")&&urlp.contains("job")&&!urlp.endsWith("job")&&page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
 
             String html = htmlParseData.getHtml();
@@ -46,7 +46,10 @@ public class jobinja_ir extends WebCrawler {
             url = page.getWebURL().getURL();
 //            System.out.println(doc.getElementsByClass("intro").get(0).getElementsByTag("header").get(0).getElementsByTag("h2").text());
             title = doc.getElementsByClass("job-title").get(0).text();
-            body=doc.getElementsByClass("cell three").get(0).text();
+//            System.out.println(title);
+            body=doc.getElementsByClass("three").get(0).text();
+//            System.out.println(body);
+            date="نامعین";
 
 //            System.out.println(body);
 //            System.out.println("URL: " + url);
