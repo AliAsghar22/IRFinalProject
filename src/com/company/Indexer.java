@@ -41,6 +41,27 @@ public class Indexer {
         }
     }
 
+    public static void add(String url, String title, String body, String date, String place){
+
+        Document document = new Document();
+        TextField field1 = new TextField("url", url, Field.Store.YES);
+        TextField field2 = new TextField("title", title, Field.Store.YES);
+        TextField field3 = new TextField("body", body, Field.Store.YES);
+        StringField field4 = new StringField("date", date, Field.Store.YES);
+        StringField field5 = new StringField("place", place, Field.Store.YES);
+
+        document.add(field1);
+        document.add(field2);
+        document.add(field3);
+        document.add(field4);
+        document.add(field5);
+        try {
+            w.addDocument(document);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void add(String url, String title, String body, String date){
 
         Document document = new Document();
@@ -53,6 +74,22 @@ public class Indexer {
         document.add(field2);
         document.add(field3);
         document.add(field4);
+        try {
+            w.addDocument(document);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void add(String url, String title, String body){
+
+        Document document = new Document();
+        TextField field1 = new TextField("url", url, Field.Store.YES);
+        TextField field2 = new TextField("title", title, Field.Store.YES);
+        TextField field3 = new TextField("body", body, Field.Store.YES);
+        document.add(field1);
+        document.add(field2);
+        document.add(field3);
         try {
             w.addDocument(document);
         } catch (IOException e) {
