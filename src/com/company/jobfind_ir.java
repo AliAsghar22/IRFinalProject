@@ -21,7 +21,7 @@ public class jobfind_ir  extends WebCrawler{
         if (FILTERS.matcher(href).matches() )
             return false;
 
-        return href.startsWith("http://www.jobfind.ir/job/");
+        return href.startsWith("http://www.jobfind.ir/");
     }
 
     /**
@@ -33,7 +33,7 @@ public class jobfind_ir  extends WebCrawler{
 
         //url title date body
 //        System.out.println("asd");
-        if (page.getParseData() instanceof HtmlParseData) {
+        if (page.getParseData() instanceof HtmlParseData &&page.getWebURL().toString().contains("/job/")) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
 
             String html = htmlParseData.getHtml();
@@ -52,11 +52,13 @@ public class jobfind_ir  extends WebCrawler{
             if (doc.getElementsByClass("excerpt").size()>0){
                 body=doc.getElementsByClass("excerpt").get(0).text();
             }
+//            System.out.println(date);
 //            System.out.println(body);
 //            System.out.println("URL: " + url);
 //            System.out.println("title: " + title);
 //            System.out.println("date: " + date);
 //            System.out.println("body: " + body);
+            System.out.println(date);
             Indexer.add(url, title, body, date);
         }
     }
