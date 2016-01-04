@@ -25,7 +25,13 @@ public class estekhtam_com extends WebCrawler {
         if (FILTERS.matcher(href).matches() || href.startsWith("http://job.estekhtam.com/"))
             return false;
 
-        return  href.startsWith("http://www.estekhtam.com/")  ;
+        return (href.startsWith("http://www.estekhtam.com/")
+                || href.startsWith("http://www.estekhtam.com/page/"))
+                && (!href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%AA%D9%87%D8%B1%D8%A7%D9%86/")
+                && !href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%A8%D8%A7%D9%86%DA%A9-%D9%87%D8%A7/")
+                && ! href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%87%D8%A7%DB%8C-%D9%88%DB%8C%DA%98%D9%87/")
+                &&  !href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D9%87%D8%A7%DB%8C-%DA%A9%D8%B4%D9%88%D8%B1/")
+                &&  !href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D8%AF%D9%87-%D9%87%D8%A7/"));
     }
 
     /**
@@ -51,11 +57,10 @@ public class estekhtam_com extends WebCrawler {
                 //title = doc.title();
                 title= doc.select("h2.box-blog").get(0).select("a").get(0).text();
                 System.out.println("title: " + title);
-                for (int i=0 ; i < doc.getElementsByClass("entry").get(0).getElementsByTag("p").size(); i++){
+                /*for (int i=0 ; i < doc.getElementsByClass("entry").get(0).getElementsByTag("p").size(); i++){
                    body = body + doc.getElementsByClass("entry").get(0).getElementsByTag("p").get(i).text();
-                }
-             //   body.concat(doc.getElementsByClass("hreview").get(0).getElementsByTag("p").get(1).text());
-             //   body.concat(doc.getElementsByClass("hreview").get(0).getElementsByTag("p").get(2).text());
+                }*/
+                body = doc.getElementsByClass("entry").get(0).text();
                 System.out.println("body: " + body);
                 System.out.println("URL: " + url);
 
