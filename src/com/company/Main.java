@@ -8,9 +8,9 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Main{
 
-    private static int maxPagesToFetch = 1000;
+    private static int maxPagesToFetch = 50;
     private static int maxDepthOfCrawling = 2;
-    private static int numberOfCrawlers = 1;
+    private static int numberOfCrawlers = 4;
 
     public static void main(String[] args) throws Exception {
 
@@ -22,16 +22,29 @@ public class Main{
         config.setMaxDepthOfCrawling(maxDepthOfCrawling);
         config.setMaxPagesToFetch(maxPagesToFetch);
         config.setResumableCrawling(false);
+
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-       // controller.addSeed("http://www.estekhdamiran.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%AA%D9%87%D8%B1%D8%A7%D9%86");
-       // controller.addSeed("http://www.estekhdamiran.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%AA%D9%87%D8%B1%D8%A7%D9%86");
-       // controller.addSeed("http://www.estekhdamiran.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D9%87%D8%B1%D8%B3%D8%AA%D8%A7%D9%86");
-        controller.addSeed("http://karfa.ir/");
+        CrawlController controller1 = new CrawlController(config, pageFetcher, robotstxtServer);
+        CrawlController controller2 = new CrawlController(config, pageFetcher, robotstxtServer);
+        CrawlController controller3 = new CrawlController(config, pageFetcher, robotstxtServer);
+        CrawlController controller4 = new CrawlController(config, pageFetcher, robotstxtServer);
+        CrawlController controller5 = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        controller.start(karfa_ir.class, numberOfCrawlers);
+//        controller.addSeed("http://estekhdame.ir/");
+//        controller.start(estekhdame_ir.class,numberOfCrawlers);
+        controller1.addSeed("https://jobinja.ir/jobs");
+        controller1.start(jobinja_ir.class,numberOfCrawlers);
+//        controller2.addSeed("http://www.jobfind.ir/job/");
+//        controller2.start(jobfind_ir.class,numberOfCrawlers);
+//        controller3.addSeed("http://estekhdamia.ir/");
+//        controller3.start(estekhdamia_ir.class,numberOfCrawlers);
+//        controller4.addSeed("http://www.mihanwork.com/");
+//        controller4.start(mihanwork_com.class,numberOfCrawlers);
+//        controller5.addSeed("http://www.webdivar.com");
+//        controller5.start(webdivar_com.class,numberOfCrawlers);
         indexer.close();
     }
 
