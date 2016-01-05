@@ -34,8 +34,8 @@ public class Main{
 
 //        controller.addSeed("http://estekhdame.ir/");
 //        controller.start(estekhdame_ir.class,numberOfCrawlers);
-        controller1.addSeed("https://jobinja.ir/jobs");
-        controller1.start(jobinja_ir.class,numberOfCrawlers);
+        controller1.addSeed("http://www.estekhdamiran.com/");
+        controller1.start(estekhdamiran_com.class,numberOfCrawlers);
 //        controller2.addSeed("http://www.jobfind.ir/job/");
 //        controller2.start(jobfind_ir.class,numberOfCrawlers);
 //        controller3.addSeed("http://estekhdamia.ir/");

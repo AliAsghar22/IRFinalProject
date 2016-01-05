@@ -22,10 +22,13 @@ public class iranestekhdam_ir extends WebCrawler {
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
 
-        if (FILTERS.matcher(href).matches() || href.startsWith("http://iranestekhdam.ir/category/"))
+        if (FILTERS.matcher(href).matches() || href.startsWith("http://iranestekhdam.ir/category/")  || href.startsWith("http://iranestekhdam.ir/about-me/"))
             return false;
 
-        return (href.startsWith("http://iranestekhdam.ir/") && href.contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85"));
+        return ((href.startsWith("http://iranestekhdam.ir/"))
+                && (!href.startsWith("http://iranestekhdam.ir/%D9%86%D8%B1%D8%AE-%D8%AA%D8%A8%D9%84%DB%8C%D8%BA%D8%A7%D8%AA-%D8%AF%D8%B1-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/")
+                && !href.startsWith("http://iranestekhdam.ir/%D9%86%D9%85%D8%A7%DB%8C%D8%B4-%D8%AF%D9%84%D8%AE%D9%88%D8%A7%D9%87-%D8%A8%D8%B1%D8%A7%D8%B3%D8%A7%D8%B3-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86%D9%87%D8%A7/")
+                ));
     }
 
     /**
@@ -48,17 +51,16 @@ public class iranestekhdam_ir extends WebCrawler {
 
             url = page.getWebURL().getURL();
 
-            //   if (url.toString().contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85")){
-            //title = doc.title();
-            title =doc.getElementsByClass("wow fadeIn").get(0).getElementsByTag("header").text();
-            body=doc.getElementsByClass("single").get(0).text();
-            date = doc.getElementsByClass("pix-Publish").get(0).text();
-            System.out.println("URL: " + url);
+            System.out.println(url);
+            if (url.toString().contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85")){
+            title = doc.select("h2 > a").get(0).text();
             System.out.println("title: " + title);
-            System.out.println("date: " + date);
+            body=doc.getElementsByClass("single").get(0).text();
             System.out.println("body: " + body);
+            date = doc.getElementsByClass("pix-Publish").get(0).text();
+            System.out.println("date: " + date);
             Indexer.add(url, title, body, date);
-            //   }
+            }
 
         }
     }

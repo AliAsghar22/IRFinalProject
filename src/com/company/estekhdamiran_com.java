@@ -24,7 +24,6 @@ public class estekhdamiran_com extends WebCrawler {
 
         if (FILTERS.matcher(href).matches())
             return false;
-        System.out.println(href);
         return href.startsWith("http://www.estekhdamiran.com/");
     }
 
@@ -47,8 +46,9 @@ public class estekhdamiran_com extends WebCrawler {
             String date = null;
 
             url = page.getWebURL().getURL();
+            String pattern = "http://www.estekhdamiran.com/[0-9]+/.*";
 
-         //   if (url.toString().contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85")){
+           if (url.matches(pattern)){
                 //title = doc.title();
                 title=doc.getElementsByClass("entry-title").get(0).text();
                 body=doc.getElementsByClass("entry-content").get(0).text();
@@ -58,7 +58,7 @@ public class estekhdamiran_com extends WebCrawler {
                 System.out.println("date: " + date);
                 System.out.println("body: " + body);
                 Indexer.add(url, title, body, date);
-         //   }
+            }
 
         }
     }

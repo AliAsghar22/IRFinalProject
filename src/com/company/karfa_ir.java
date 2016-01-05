@@ -49,10 +49,10 @@ public class karfa_ir extends WebCrawler {
             url = page.getWebURL().getURL();
             //if ()){
             //title = doc.title();
-            title= doc.getElementsByClass("news").get(0).getElementsByTag("h1").get(0).getElementsByTag("a").get(0).text();
+            title= doc.getElementById("news").getElementsByTag("h1").get(0).getElementsByTag("a").get(0).text();
             System.out.println("title: " + title);
 
-            body = doc.getElementsByClass("body").get(0).text();
+            body = doc.getElementById("news").text();
             //   body.concat(doc.getElementsByClass("hreview").get(0).getElementsByTag("p").get(1).text());
             //   body.concat(doc.getElementsByClass("hreview").get(0).getElementsByTag("p").get(2).text());
             System.out.println("body: " + body);

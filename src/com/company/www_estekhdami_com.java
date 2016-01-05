@@ -22,7 +22,7 @@ public class www_estekhdami_com extends WebCrawler {
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
 
-        if (FILTERS.matcher(href).matches())
+        if (FILTERS.matcher(href).matches() || url.toString().startsWith("http://www.estekhdami.com/category/"))
             return false;
       //  "%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85"
 //"http://www.estekhdami.com/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D9%87%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%DA%A9%D8%B1%D9%85%D8%A7%D9%86%D8%B4/"
