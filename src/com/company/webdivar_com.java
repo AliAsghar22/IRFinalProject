@@ -21,7 +21,6 @@ public class webdivar_com extends WebCrawler {
 //        System.out.println("start tag = "+href.startsWith("http://estekhdame.ir/blog/tag/")+url);
         if (FILTERS.matcher(href).matches())
             return false;
-
         return href.startsWith("http://www.webdivar.com");
     }
 
@@ -52,6 +51,8 @@ public class webdivar_com extends WebCrawler {
 
                 title = doc.getElementsByClass("company-title").get(0).text();
                 body=doc.getElementsByAttributeValue("id","ContentPlaceHolder1_GridView7").get(0).text();
+                System.out.println(title);
+                date="نامعین";
                 //            System.out.println(body);
 //                System.out.println("URL: " + url);
 //                System.out.println("title: " + title);
