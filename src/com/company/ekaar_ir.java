@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Microsoft on 10/12/2015.
  */
-public class estekhdamia_ir extends WebCrawler {
+public class ekaar_ir extends WebCrawler {
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
@@ -21,7 +21,7 @@ public class estekhdamia_ir extends WebCrawler {
         if (FILTERS.matcher(href).matches())
             return false;
 
-        return href.startsWith("http://estekhdamia.ir/");
+        return href.startsWith("http://ekaar.ir/joblist.aspx") || href.startsWith("http://ekaar.ir/job");
     }
 
     /**
@@ -32,7 +32,7 @@ public class estekhdamia_ir extends WebCrawler {
     public void visit(Page page) {
 
         //url title date body
-        if (!page.getWebURL().toString().contains("category"))
+        if (page.getWebURL().toString().contains("job-"))
         {
             if (page.getParseData() instanceof HtmlParseData) {
                 HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
@@ -48,9 +48,9 @@ public class estekhdamia_ir extends WebCrawler {
                 url = page.getWebURL().getURL();
                 title = doc.title();
 //                System.out.println(title);
-                date=doc.getElementsByClass("single").get(0).getElementsByClass("code").get(2).text();
-                if (doc.getElementsByAttributeValue("id","content").size()>0)
-                    body=doc.getElementsByAttributeValue("id","content").get(0).text();
+                date=doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
+                body=doc.getElementsByClass("text").get(0).text();
+                System.out.println(title);
     //            System.out.println(body);
 //                System.out.println("URL: " + url);
 //                System.out.println("title: " + title);
