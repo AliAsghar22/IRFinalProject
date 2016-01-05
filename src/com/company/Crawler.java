@@ -224,13 +224,11 @@ public class Crawler extends WebCrawler {
                     Indexer.add(url, title, body, date);
                 }
 
-            } else if (url.startsWith("http://ekaar.ir/joblist.aspx")) {
-                if (url.contains("job-")) {
+            } else if (url.startsWith("http://ekaar.ir/job-")) {
                     title = doc.title();
                     date = doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
                     body = doc.getElementsByClass("text").get(0).text();
                     Indexer.add(url, title, body, date);
-                }
             } else if (url.startsWith("https://jobinja.ir/")) {
                 title = doc.getElementsByClass("job-title").get(0).text();
                 body = doc.getElementsByClass("three").get(0).text();
