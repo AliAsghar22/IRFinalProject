@@ -58,6 +58,8 @@ public class estekhdamiran_com extends WebCrawler {
                 System.out.println("date: " + date);
                 System.out.println("body: " + body);
                 Indexer.add(url, title, body, date);
+
+               //
             }
 
         }
