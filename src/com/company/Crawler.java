@@ -5,8 +5,6 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
@@ -149,110 +147,112 @@ public class Crawler extends WebCrawler {
                     body = doc.getElementsByClass("post-content").get(0).text();
                     date = doc.getElementsByClass("date").get(0).text();
                     Indexer.add(url, title, body, date);
-                } else if (url.startsWith("http://karfa.ir/")) {
-                    title = doc.getElementById("news").getElementsByTag("h1").get(0).getElementsByTag("a").get(0).text();
-                    body = doc.getElementById("news").text();
-                    Indexer.add(url, title, body, date);
-                } else if (url.startsWith("http://iranestekhdam.ir/")) {
-                    url = page.getWebURL().getURL();
-
-                    if (url.toString().contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85")) {
-                        title = doc.select("h2 > a").get(0).text();
-                        body = doc.getElementsByClass("single").get(0).text();
-                        date = doc.getElementsByClass("pix-Publish").get(0).text();
-                        Indexer.add(url, title, body, date);
-                    }
-                } else if (url.startsWith("http://estekhdamjoo.ir/")) {
-                    String pattern = "http://estekhdamjoo.ir/[0-9][0-9][0-9]+/.*";
-
-                    if (!url.toString().contains("PageId") && url.matches(pattern)) {
-                        //title = doc.title();
-
-                        title = doc.getElementById("ctl00_ContentPlaceHolder1_DataList1_ctl00_TitleLabel").text();
-                        body = doc.getElementsByClass("OrgBox").get(0).getElementsByClass("boxInformation").get(0).text();
-                        body = body + doc.getElementById("divText").text();
-                        Indexer.add(url, title, body, date);
-
-                    }
-                } else if (url.startsWith("http://www.estekhdamiran.com/")) {
-                    String pattern = "http://www.estekhdamiran.com/[0-9]+/.*";
-                    if (url.matches(pattern)) {
-                        title = doc.getElementsByClass("entry-title").get(0).text();
-                        body = doc.getElementsByClass("entry-content").get(0).text();
-                        date = doc.getElementsByClass("updated").get(0).text();
-                        Indexer.add(url, title, body, date);
-                    }
-                } else if (url.startsWith("http://www.estekhtam.com/")) {
-                    title = doc.select("h2.box-blog").get(0).select("a").get(0).text();
-                    body = doc.getElementsByClass("entry").get(0).text();
-                    Indexer.add(url, title, body, date);
-                } else if (url.startsWith("http://job.estekhtam.com/")) {
-                    if (url.contains("ads-")) {
-                        title = doc.getElementsByClass("detail-nav-row").get(0).text();
-                        body = doc.getElementsByClass("emp-right").get(0).getElementsByTag("p").get(0).text();
-                        Indexer.add(url, title, body, date);
-                    }
-                } else if (url.startsWith("http://koomeshkar.ir/")) {
-                    for (int i = 1; i < doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").size(); i++) {
-                        title = doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(1).text();
-                        body = doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(3).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(4).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(5).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(6).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(7).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(8).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(9).text();
-                        body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(12).text();
-                        date = doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(2).text();
-                        Indexer.add(url, title, body, date);
-                    }
                 }
-                //Vahid
-                else if (url.startsWith("http://eshetab.com/")) {
-                    if (url.contains("/ads/") || url.contains("/view/")) {
-                        url = page.getWebURL().getURL();
-                        title = doc.title();
-                        date = doc.getElementsByClass("nameDiv").get(1).text();
-                        body = doc.getElementsByClass("addsTexts").get(0).text();
-                        Indexer.add(url, title, body, date);
-                    }
-                } else if (url.startsWith("http://www.webdivar.com/")) {
-                    if (url.contains("Employer")) {
-                        url = page.getWebURL().getURL();
-                        title = doc.getElementsByClass("company-title").get(0).text();
-                        body = doc.getElementsByAttributeValue("id", "ContentPlaceHolder1_GridView7").get(0).text();
-                        Indexer.add(url, title, body, date);
-                    }
+            } else if (url.startsWith("http://karfa.ir/")) {
+                title = doc.getElementById("news").getElementsByTag("h1").get(0).getElementsByTag("a").get(0).text();
+                body = doc.getElementById("news").text();
+                Indexer.add(url, title, body, date);
+            } else if (url.startsWith("http://iranestekhdam.ir/")) {
+                url = page.getWebURL().getURL();
 
-                } else if (url.startsWith("http://ekaar.ir/joblist.aspx")) {
-                    if (url.contains("job-")) {
-                        title = doc.title();
-                        date = doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
-                        body = doc.getElementsByClass("text").get(0).text();
-                        Indexer.add(url, title, body, date);
-                    }
-                } else if (url.startsWith("https://jobinja.ir/")) {
-                    title = doc.getElementsByClass("job-title").get(0).text();
-                    body = doc.getElementsByClass("three").get(0).text();
-                    Indexer.add(url, title, body, date);
-                } else if (url.startsWith("http://www.jobfind.ir/")) {
-                    title = doc.title();
-                    if (doc.getElementsByClass("date").size() > 0)
-                        date = doc.getElementsByClass("date").get(0).text();
-                    if (doc.getElementsByClass("excerpt").size() > 0) {
-                        body = doc.getElementsByClass("excerpt").get(0).text();
-                    }
-                    Indexer.add(url, title, body, date);
-                } else if (url.startsWith("http://estekhdame.ir/")) {
-                    title = doc.title();
-                    if (doc.getElementsByClass("aexpire").size() > 0)
-                        date = doc.getElementsByClass("aexpire").get(0).text();
-                    if (doc.getElementsByClass("matn").size() > 0)
-                        body = doc.getElementsByClass("matn").get(0).text();
+                if (url.toString().contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85")) {
+                    title = doc.select("h2 > a").get(0).text();
+                    body = doc.getElementsByClass("single").get(0).text();
+                    date = doc.getElementsByClass("pix-Publish").get(0).text();
                     Indexer.add(url, title, body, date);
                 }
+            } else if (url.startsWith("http://estekhdamjoo.ir/")) {
+                String pattern = "http://estekhdamjoo.ir/[0-9][0-9][0-9]+/.*";
 
+                if (!url.toString().contains("PageId") && url.matches(pattern)) {
+                    //title = doc.title();
+
+                    title = doc.getElementById("ctl00_ContentPlaceHolder1_DataList1_ctl00_TitleLabel").text();
+                    body = doc.getElementsByClass("OrgBox").get(0).getElementsByClass("boxInformation").get(0).text();
+                    body = body + doc.getElementById("divText").text();
+                    Indexer.add(url, title, body, date);
+
+                }
+            } else if (url.startsWith("http://www.estekhdamiran.com/")) {
+                String pattern = "http://www.estekhdamiran.com/[0-9]+/.*";
+                if (url.matches(pattern)) {
+                    title = doc.getElementsByClass("entry-title").get(0).text();
+                    body = doc.getElementsByClass("entry-content").get(0).text();
+                    date = doc.getElementsByClass("updated").get(0).text();
+                    Indexer.add(url, title, body, date);
+                }
+            } else if (url.startsWith("http://www.estekhtam.com/")) {
+                title = doc.select("h2.box-blog").get(0).select("a").get(0).text();
+                body = doc.getElementsByClass("entry").get(0).text();
+                Indexer.add(url, title, body, date);
+            } else if (url.startsWith("http://job.estekhtam.com/")) {
+                if (url.contains("ads-")) {
+                    title = doc.getElementsByClass("detail-nav-row").get(0).text();
+                    body = doc.getElementsByClass("emp-right").get(0).getElementsByTag("p").get(0).text();
+                    Indexer.add(url, title, body, date);
+                }
+            } else if (url.startsWith("http://koomeshkar.ir/")) {
+                for (int i = 1; i < doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").size(); i++) {
+                    title = doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(1).text();
+                    body = doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(3).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(4).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(5).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(6).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(7).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(8).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(9).text();
+                    body = body + doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(12).text();
+                    date = doc.getElementsByClass("job-tbl").get(0).getElementsByTag("tr").get(i).getElementsByTag("td").get(2).text();
+                    Indexer.add(url, title, body, date);
+                }
             }
+            //Vahid
+            else if (url.startsWith("http://eshetab.com/")) {
+                if (url.contains("/ads/") || url.contains("/view/")) {
+                    url = page.getWebURL().getURL();
+                    title = doc.title();
+                    date = doc.getElementsByClass("nameDiv").get(1).text();
+                    body = doc.getElementsByClass("addsTexts").get(0).text();
+                    Indexer.add(url, title, body, date);
+                }
+            } else if (url.startsWith("http://www.webdivar.com/")) {
+                if (url.contains("Employer")) {
+//                    System.out.println(url);
+                    url = page.getWebURL().getURL();
+                    title = doc.getElementsByClass("company-title").get(0).text();
+                    body = doc.getElementsByAttributeValue("id", "ContentPlaceHolder1_GridView7").get(0).text();
+                    Indexer.add(url, title, body, date);
+                }
+
+            } else if (url.startsWith("http://ekaar.ir/joblist.aspx")) {
+                if (url.contains("job-")) {
+                    title = doc.title();
+                    date = doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
+                    body = doc.getElementsByClass("text").get(0).text();
+                    Indexer.add(url, title, body, date);
+                }
+            } else if (url.startsWith("https://jobinja.ir/")) {
+                title = doc.getElementsByClass("job-title").get(0).text();
+                body = doc.getElementsByClass("three").get(0).text();
+                Indexer.add(url, title, body, date);
+            } else if (url.startsWith("http://www.jobfind.ir/")) {
+                title = doc.title();
+                if (doc.getElementsByClass("date").size() > 0)
+                    date = doc.getElementsByClass("date").get(0).text();
+                if (doc.getElementsByClass("excerpt").size() > 0) {
+                    body = doc.getElementsByClass("excerpt").get(0).text();
+                }
+                Indexer.add(url, title, body, date);
+            } else if (url.startsWith("http://estekhdame.ir/")) {
+                title = doc.title();
+                if (doc.getElementsByClass("aexpire").size() > 0)
+                    date = doc.getElementsByClass("aexpire").get(0).text();
+                if (doc.getElementsByClass("matn").size() > 0)
+                    body = doc.getElementsByClass("matn").get(0).text();
+                Indexer.add(url, title, body, date);
+            }
+
         }
     }
 }
+
