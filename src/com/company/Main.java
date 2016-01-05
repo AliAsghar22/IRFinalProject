@@ -8,7 +8,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Main{
 
-    private static int maxPagesToFetch = 50;
+    private static int maxPagesToFetch = 1000;
     private static int maxDepthOfCrawling = 10;
     private static int numberOfCrawlers = 4;
 
@@ -42,7 +42,7 @@ public class Main{
 //        controller.addSeed("http://estekhdame.ir/");
 //        controller.addSeed("http://www.webdivar.com/");
 //        controller.addSeed("http://www.jobfind.ir/job/");
-//        controller.addSeed("http://ekaar.ir/joblist.aspx");
+        controller.addSeed("http://ekaar.ir/joblist.aspx");
 //        controller.addSeed("http://eshetab.com/");
 
         //AliAsghar
