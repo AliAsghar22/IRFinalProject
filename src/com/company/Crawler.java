@@ -236,13 +236,15 @@ public class Crawler extends WebCrawler {
                 body = doc.getElementsByClass("three").get(0).text();
                 Indexer.add(url, title, body, date);
             } else if (url.startsWith("http://www.jobfind.ir/")) {
-                title = doc.title();
-                if (doc.getElementsByClass("date").size() > 0)
-                    date = doc.getElementsByClass("date").get(0).text();
-                if (doc.getElementsByClass("excerpt").size() > 0) {
-                    body = doc.getElementsByClass("excerpt").get(0).text();
+                if (url.contains("/job/")){
+                    title = doc.title();
+                    if (doc.getElementsByClass("date").size() > 0)
+                        date = doc.getElementsByClass("date").get(0).text();
+                    if (doc.getElementsByClass("excerpt").size() > 0) {
+                        body = doc.getElementsByClass("excerpt").get(0).text();
+                    }
+                    Indexer.add(url, title, body, date);
                 }
-                Indexer.add(url, title, body, date);
             } else if (url.startsWith("http://estekhdame.ir/")) {
                 title = doc.title();
                 if (doc.getElementsByClass("aexpire").size() > 0)
