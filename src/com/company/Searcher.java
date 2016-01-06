@@ -10,8 +10,8 @@ public class Searcher {
         String body = "بدنه";
 
         System.out.println(indexer.getUrlByTitle(title));
-        System.out.println(indexer.getUrlByBody(body));
-        System.out.println(indexer.getUrlByBodyAndTitle(body, title));
+//        System.out.println(indexer.getUrlByBody(body));
+//        System.out.println(indexer.getUrlByBodyAndTitle(body, title));
 
         indexer.close();
     }

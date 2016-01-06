@@ -25,6 +25,7 @@ public class Crawler extends WebCrawler {
         String href = url.getURL().toLowerCase();
         if (FILTERS.matcher(href).matches())
             return false;
+//        System.out.println(url);
         return
                 //AliAsghar
                 (href.startsWith("http://persianagahi.com/")

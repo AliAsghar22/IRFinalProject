@@ -123,7 +123,8 @@ public class Indexer {
         TextField field2 = new TextField("title", title, Field.Store.YES);
         TextField field3 = new TextField("body", body, Field.Store.YES);
         StringField field4 = new StringField("date", date, Field.Store.YES);
-
+        System.out.println("Added Title: " + title);
+        System.out.println("URL: "+ url);
         document.add(field1);
         document.add(field2);
         document.add(field3);

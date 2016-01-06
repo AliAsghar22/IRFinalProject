@@ -8,9 +8,9 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Main{
 
-    private static int maxPagesToFetch = 1000;
-    private static int maxDepthOfCrawling = 2;
-    private static int numberOfCrawlers = 1;
+    private static int maxPagesToFetch = 50;
+    private static int maxDepthOfCrawling = 10;
+    private static int numberOfCrawlers = 4;
 
     public static void main(String[] args) throws Exception {
 
@@ -18,7 +18,7 @@ public class Main{
         String crawlStorageFolder = "crawler";
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
-        config.setPolitenessDelay(1000);
+        config.setPolitenessDelay(500);
         config.setMaxDepthOfCrawling(maxDepthOfCrawling);
         config.setMaxPagesToFetch(maxPagesToFetch);
         config.setResumableCrawling(false);
@@ -26,11 +26,6 @@ public class Main{
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-        CrawlController controller1 = new CrawlController(config, pageFetcher, robotstxtServer);
-        CrawlController controller2 = new CrawlController(config, pageFetcher, robotstxtServer);
-        CrawlController controller3 = new CrawlController(config, pageFetcher, robotstxtServer);
-        CrawlController controller4 = new CrawlController(config, pageFetcher, robotstxtServer);
-        CrawlController controller5 = new CrawlController(config, pageFetcher, robotstxtServer);
 
         //AliReza
 //        controller.addSeed("http://job.estekhtam.com/");
@@ -58,6 +53,8 @@ public class Main{
 //        controller.addSeed("http://www.e-estekhdam.com/");
 //        controller.addSeed("http://www.estekhdami.org/");
 //        controller.addSeed("http://www.irantalent.com/home/opportunities.php?r=130841466");
+
+        controller.start(Crawler.class, numberOfCrawlers);
         indexer.close();
     }
 
