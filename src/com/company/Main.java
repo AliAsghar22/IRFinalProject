@@ -38,9 +38,9 @@ public class Main{
 //        controller.addSeed("http://www.estekhtam.com/");
 //        controller.addSeed("http://www.estekhdamiran.com/");
 //        controller.addSeed("http://estekhdamjoo.ir/");
-        controller.addSeed("http://iranestekhdam.ir/");
-        controller.addSeed("http://karfa.ir/");
-        controller.addSeed("http://www.estekhdami.com/");
+//        controller.addSeed("http://iranestekhdam.ir/");
+//        controller.addSeed("http://karfa.ir/");
+//        controller.addSeed("http://www.estekhdami.com/");
 
         //Vahid
 //        controller.addSeed("https://jobinja.ir/jobs");

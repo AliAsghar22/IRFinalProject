@@ -1,5 +1,6 @@
-package com.company;
+package com.company.IndividualClassesOfSites;
 
+import com.company.Indexer;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -12,16 +13,19 @@ import java.util.regex.Pattern;
 /**
  * Created by Microsoft on 10/12/2015.
  */
-public class ekaar_ir extends WebCrawler {
+public class eshetab_com extends WebCrawler {
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
-        String href = url.getURL().toLowerCase();
+        String href = url.getURL().toLowerCase().toString();
 //        System.out.println("start tag = "+href.startsWith("http://estekhdame.ir/blog/tag/")+url);
         if (FILTERS.matcher(href).matches())
             return false;
-
-        return href.startsWith("http://ekaar.ir/joblist.aspx") || href.startsWith("http://ekaar.ir/job");
+        if (href.contains("city")||href.contains("study")){
+//            System.out.println("hi"+href);
+            return false;
+        }
+        return href.startsWith("http://eshetab.com/state/")||href.contains("/ads/");
     }
 
     /**
@@ -30,9 +34,9 @@ public class ekaar_ir extends WebCrawler {
      */
     @Override
     public void visit(Page page) {
-
+//        System.out.println(page.getWebURL().toString().contains("city")+"  "+page.getWebURL());
         //url title date body
-        if (page.getWebURL().toString().contains("job-"))
+        if (page.getWebURL().toString().contains("/ads/")||page.getWebURL().toString().contains("/view/"))
         {
             if (page.getParseData() instanceof HtmlParseData) {
                 HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
@@ -48,9 +52,11 @@ public class ekaar_ir extends WebCrawler {
                 url = page.getWebURL().getURL();
                 title = doc.title();
 //                System.out.println(title);
-                date=doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
-                body=doc.getElementsByClass("text").get(0).text();
-                System.out.println(title);
+
+                date = doc.getElementsByClass("nameDiv").get(1).text();
+                body=doc.getElementsByClass("addsTexts").get(0).text();
+                System.out.println(date);
+                System.out.println(body);
     //            System.out.println(body);
 //                System.out.println("URL: " + url);
 //                System.out.println("title: " + title);

@@ -1,5 +1,6 @@
-package com.company;
+package com.company.IndividualClassesOfSites;
 
+import com.company.Indexer;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Taghizadeh on 12/9/2015.
  */
-public class estekhtam_com extends WebCrawler {
+public class www_estekhdami_com extends WebCrawler {
 
     private final static String VISIT_PATTERN = ".*\\.html";
     private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$");
@@ -22,16 +23,11 @@ public class estekhtam_com extends WebCrawler {
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
 
-        if (FILTERS.matcher(href).matches() || href.startsWith("http://job.estekhtam.com/"))
+        if (FILTERS.matcher(href).matches() || url.toString().startsWith("http://www.estekhdami.com/category/"))
             return false;
-
-        return (href.startsWith("http://www.estekhtam.com/")
-                || href.startsWith("http://www.estekhtam.com/page/"))
-                && (!href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%AA%D9%87%D8%B1%D8%A7%D9%86/")
-                && !href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%A8%D8%A7%D9%86%DA%A9-%D9%87%D8%A7/")
-                && ! href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%87%D8%A7%DB%8C-%D9%88%DB%8C%DA%98%D9%87/")
-                &&  !href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D9%87%D8%A7%DB%8C-%DA%A9%D8%B4%D9%88%D8%B1/")
-                &&  !href.startsWith("http://www.estekhtam.com/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D8%AF%D9%87-%D9%87%D8%A7/"));
+      //  "%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85"
+//"http://www.estekhdami.com/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D9%87%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%DA%A9%D8%B1%D9%85%D8%A7%D9%86%D8%B4/"
+        return  (href.startsWith("http://www.estekhdami.com/") && href.contains("%d8%a7%d8%b3%d8%aa%d8%ae%d8%af%d8%a7%d9%85")) || href.startsWith("http://www.estekhdami.com/page/") ;
     }
 
     /**
@@ -45,7 +41,7 @@ public class estekhtam_com extends WebCrawler {
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
             String html = htmlParseData.getHtml();
-               org.jsoup.nodes.Document doc = Jsoup.parse(html);
+            org.jsoup.nodes.Document doc = Jsoup.parse(html);
 
             String url;
             String title;
@@ -54,21 +50,24 @@ public class estekhtam_com extends WebCrawler {
 
             url = page.getWebURL().getURL();
             //if ()){
-                //title = doc.title();
-                title= doc.select("h2.box-blog").get(0).select("a").get(0).text();
+            //title = doc.title();
+            if (!url.startsWith("http://www.estekhdami.com/page/")){
+                title= doc.getElementById("post-header").getElementsByTag("h1").get(0).text();
                 System.out.println("title: " + title);
-                /*for (int i=0 ; i < doc.getElementsByClass("entry").get(0).getElementsByTag("p").size(); i++){
-                   body = body + doc.getElementsByClass("entry").get(0).getElementsByTag("p").get(i).text();
-                }*/
-                body = doc.getElementsByClass("entry").get(0).text();
+
+                body = doc.getElementsByClass("post-content").get(0).text();
+                date = doc.getElementsByClass("date").get(0).text();
+
+                //   body.concat(doc.getElementsByClass("hreview").get(0).getElementsByTag("p").get(1).text());
+                //   body.concat(doc.getElementsByClass("hreview").get(0).getElementsByTag("p").get(2).text());
                 System.out.println("body: " + body);
                 System.out.println("URL: " + url);
 
                 System.out.println("date: " + date);
 
                 Indexer.add(url, title, body, date);
-           // }
-
+            // }
+            }
         }
     }
 

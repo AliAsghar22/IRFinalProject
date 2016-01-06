@@ -1,4 +1,4 @@
-package com.company;
+package com.company.IndividualClassesOfSites;
 
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;

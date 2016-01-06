@@ -1,5 +1,6 @@
-package com.company;
+package com.company.IndividualClassesOfSites;
 
+import com.company.Indexer;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
