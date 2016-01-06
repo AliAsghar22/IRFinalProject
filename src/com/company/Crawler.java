@@ -225,16 +225,18 @@ public class Crawler extends WebCrawler {
                 }
 
             } else if (url.startsWith("http://ekaar.ir/job-")) {
-                    title = doc.title();
-                    date = doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
-                    body = doc.getElementsByClass("text").get(0).text();
-                    Indexer.add(url, title, body, date);
-            } else if (url.startsWith("https://jobinja.ir/")) {
-                title = doc.getElementsByClass("job-title").get(0).text();
-                body = doc.getElementsByClass("three").get(0).text();
+                title = doc.title();
+                date = doc.getElementsByClass("jobrightinfo").get(0).getElementsByTag("span").get(2).text();
+                body = doc.getElementsByClass("text").get(0).text();
                 Indexer.add(url, title, body, date);
+            } else if (url.startsWith("https://jobinja.ir/")) {
+                if (url.contains("companies") && url.contains("/jobs/") && !url.endsWith("jobs")) {
+                    title = doc.getElementsByClass("job-title").get(0).text();
+                    body = doc.getElementsByClass("three").get(0).text();
+                    Indexer.add(url, title, body, date);
+                }
             } else if (url.startsWith("http://www.jobfind.ir/")) {
-                if (url.contains("/job/")){
+                if (url.contains("/job/")) {
                     title = doc.title();
                     if (doc.getElementsByClass("date").size() > 0)
                         date = doc.getElementsByClass("date").get(0).text();
