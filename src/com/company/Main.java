@@ -51,7 +51,6 @@ public class Main{
 //        controller.addSeed("http://eshetab.com/");
 
         //AliAsghar
-
 //        controller.addSeed("http://persianagahi.com/");
 //        controller.addSeed("http://estekhdam24.com/");
 //        controller.addSeed("http://www.karyab.net/");
@@ -59,7 +58,6 @@ public class Main{
 //        controller.addSeed("http://www.e-estekhdam.com/");
 //        controller.addSeed("http://www.estekhdami.org/");
 //        controller.addSeed("http://www.irantalent.com/home/opportunities.php?r=130841466");
-
         indexer.close();
     }
 
