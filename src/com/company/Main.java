@@ -32,18 +32,34 @@ public class Main{
         CrawlController controller4 = new CrawlController(config, pageFetcher, robotstxtServer);
         CrawlController controller5 = new CrawlController(config, pageFetcher, robotstxtServer);
 
+        //AliReza
+//        controller.addSeed("http://job.estekhtam.com/");
+//        controller.addSeed("http://koomeshkar.ir/jobs/?j=%DA%A9%D9%84%DB%8C%D9%87%20%D9%85%D8%B4%D8%A7%D8%BA%D9%84");
+//        controller.addSeed("http://www.estekhtam.com/");
+//        controller.addSeed("http://www.estekhdamiran.com/");
+//        controller.addSeed("http://estekhdamjoo.ir/");
+        controller.addSeed("http://iranestekhdam.ir/");
+        controller.addSeed("http://karfa.ir/");
+        controller.addSeed("http://www.estekhdami.com/");
+
+        //Vahid
+//        controller.addSeed("https://jobinja.ir/jobs");
 //        controller.addSeed("http://estekhdame.ir/");
-//        controller.start(estekhdame_ir.class,numberOfCrawlers);
-        controller1.addSeed("http://www.estekhdamiran.com/");
-        controller1.start(estekhdamiran_com.class,numberOfCrawlers);
-//        controller2.addSeed("http://www.jobfind.ir/job/");
-//        controller2.start(jobfind_ir.class,numberOfCrawlers);
-//        controller3.addSeed("http://estekhdamia.ir/");
-//        controller3.start(estekhdamia_ir.class,numberOfCrawlers);
-//        controller4.addSeed("http://www.mihanwork.com/");
-//        controller4.start(mihanwork_com.class,numberOfCrawlers);
-//        controller5.addSeed("http://www.webdivar.com");
-//        controller5.start(webdivar_com.class,numberOfCrawlers);
+//        controller.addSeed("http://www.webdivar.com/");
+//        controller.addSeed("http://www.jobfind.ir/job/");
+//        controller.addSeed("http://ekaar.ir/joblist.aspx");
+//        controller.addSeed("http://eshetab.com/");
+
+        //AliAsghar
+
+//        controller.addSeed("http://persianagahi.com/");
+//        controller.addSeed("http://estekhdam24.com/");
+//        controller.addSeed("http://www.karyab.net/");
+//        controller.addSeed("http://estekhdam-yab.persianblog.ir/");
+//        controller.addSeed("http://www.e-estekhdam.com/");
+//        controller.addSeed("http://www.estekhdami.org/");
+//        controller.addSeed("http://www.irantalent.com/home/opportunities.php?r=130841466");
+
         indexer.close();
     }
 
