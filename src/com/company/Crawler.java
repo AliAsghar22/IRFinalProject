@@ -102,7 +102,7 @@ public class Crawler extends WebCrawler {
                 title = doc.select("div.node_title").get(0).text();
                 body = doc.select("div.agahi_content").get(0).text();
 
-                Indexer.add(url, title, body);
+                Indexer.add(url, title, body, date);
 
             } else if (url.startsWith("http://estekhdam24.com/")) {
                 title = doc.select("h1.singlegavi").get(0).text();
@@ -139,7 +139,7 @@ public class Crawler extends WebCrawler {
                 title = doc.select("td.pageTitle2").get(0).text();
                 body = doc.select("table.nopadding.centerTable.jobsMarginBottom28.jobMarginTop5").get(0).text()
                         + doc.select("table.nopadding.centerTable.jobsMarginBottom28").text();
-                Indexer.add(url, title, body);
+                Indexer.add(url, title, body, date);
             }
             //AliReza
             else if (url.startsWith("http://www.estekhdami.com/")) {
